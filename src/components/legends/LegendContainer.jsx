@@ -4,25 +4,36 @@ import { data } from "../../helpers/data";
 import { useState, Fragment } from "react";
 import LegendCard from "./LegendCard";
 
-
 const LegendContainer = () => {
-  
-    
-  return (
-    <div>        
-      <Form.Control type="search"  className="w-50 mx-auto my-2" placeholder="Search Legends..." />
-      <Container className='p-3 my-3 card-container w-75'>
-        <Row xs={1} md={2} xl={3} className='justify-content-center g-3'>
-        {
-          data.map ((legend)=>(
-            
-            <LegendCard key={legend.id} legend={legend} />
-          ))
-        }
-        </Row>
-      </Container>
-</div>
-  )
+
+const [search, setSearch] = useState("")
+
+const handleChange = (e) => {
+  setSearch(e.target.value) //!Setter metodu her zaman asenkron çalışır
+
 }
 
-export default LegendContainer
+const filteredData = data.filter((item)=>item.name.toLowerCase().includes(search.trim().toLowerCase()))
+
+return (
+    <div>
+      <Form.Control
+        className="w-50 mx-auto my-2"
+        type="search"
+        placeholder="Search Legends.."
+
+        onChange={(handleChange)}
+      />
+
+      <Container className="p-3 my-3 card-container">
+        <Row xs={1} md={2} xl={3} className="justify-content-center g-3">
+          {filteredData.map((legend) => (
+            <LegendCard key={legend.id} legend={legend}/>
+          ))}
+        </Row>
+      </Container>
+    </div>
+  );
+};
+
+export default LegendContainer;
