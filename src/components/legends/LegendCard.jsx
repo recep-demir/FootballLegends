@@ -1,9 +1,10 @@
 import { Col, Card } from "react-bootstrap";
 import { useState } from "react";
 
+const LegendCard = ({ legend }) => {
 
-const LegendCard = ({legend}) => {
-    const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
+
   return (
     <Col key={legend.id}>
       <Card className="player-card" onClick={() => setShow(!show)}>
@@ -27,7 +28,7 @@ const LegendCard = ({legend}) => {
         )}
       </Card>
     </Col>
-  )
-}
+  );
+};
 
-export default LegendCard
+export default LegendCard;
